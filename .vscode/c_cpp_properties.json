@@ -1,0 +1,49 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "C:/Users/Pouya/Desktop/New folder (2)/include",
+                "C:/Users/Pouya/Desktop/New folder (2)/src",
+                "C:/Users/Pouya/Desktop/New folder (2)/lib/PID",
+                "C:/Users/Pouya/.platformio/packages/framework-cmsis@2.50501.200527/CMSIS/Include",
+                "C:/Users/Pouya/.platformio/packages/framework-cmsis-stm32f0/Include",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "C:/Users/Pouya/Desktop/New folder (2)/include",
+                    "C:/Users/Pouya/Desktop/New folder (2)/src",
+                    "C:/Users/Pouya/Desktop/New folder (2)/lib/PID",
+                    "C:/Users/Pouya/.platformio/packages/framework-cmsis@2.50501.200527/CMSIS/Include",
+                    "C:/Users/Pouya/.platformio/packages/framework-cmsis-stm32f0/Include",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60118",
+                "STM32F030x6",
+                "ENV_STM32F030K6T6",
+                "F_CPU=48000000L",
+                ""
+            ],
+            "forcedInclude": [
+                "C:/Users/Pouya/.platformio/packages/framework-cmsis-stm32f0/Include/stm32f0xx.h",
+                ""
+            ],
+            "compilerPath": "C:/Users/Pouya/.platformio/packages/toolchain-gccarmnoneeabi@1.70201.0/bin/arm-none-eabi-gcc.exe",
+            "compilerArgs": [
+                "-mthumb",
+                "-mcpu=cortex-m0",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
