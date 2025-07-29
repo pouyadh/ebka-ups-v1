@@ -1,7 +1,6 @@
 #pragma once
 #include <unistd.h>
 #include <stdio.h>
-#include "PID.h"
 
 #define FW_VER "1.0.0"
 extern volatile uint16_t adc_readings[5];
