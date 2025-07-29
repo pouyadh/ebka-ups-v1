@@ -3,7 +3,7 @@
 #include <math.h>
 #include "util/GPIO.hpp"
 #include "util/Blinker.hpp"
-PID mainPID(1.0f,0.2f,0.5f,0,3800,false,"MAIN",false);
+#include "util/BuckBoost.hpp"
 
 typedef enum main_state_e {
     STATE_NOBATTERY = 0,
@@ -27,51 +27,19 @@ charging_state_t chargingState;
 
 
 
-
+BuckBoost buckboost(1900,1900);
 
 float V_out = 10.5f;
 float I_out = 3.0f;
 float P_out = 100.0f;
-bool outputEnable = false;
 float batteryAmper = 7;
 uint8_t batteryCellCount = 0;
 
-void updatePWMs() {
-    float vMargin = V_out - outputVoltage;
-    float iMargin = I_out - outputCurrent;
-    float wMargin = P_out - outputWattage;
-    float minMargin = vMargin;
-    if (iMargin < minMargin) minMargin = iMargin;
-    if (wMargin < minMargin) minMargin = wMargin;
-    static uint32_t conv = 0;
-    if (minMargin == vMargin) {
-        conv = mainPID.update(V_out,outputVoltage);
-    } else if (minMargin == iMargin) {
-        conv = mainPID.update(I_out,outputCurrent);
-    } else if (minMargin == wMargin) {
-        conv = mainPID.update(P_out,outputWattage);
-    }
-
-    if (outputEnable) {
-        if (conv <= 1900) {
-            TIM1->CCR1 = conv;
-            TIM3->CCR1 = 0;
-        } else {
-            TIM1->CCR1 = 1900;
-            TIM3->CCR1 = conv - 1900;
-        }
-    } else {
-        TIM1->CCR1 = 0;
-        TIM3->CCR1 = 0;
-        mainPID.reset();
-        mainPID.value = 0;
-    }
-}
 
 void detectBatteryCellCount() {
-    outputEnable = false;
-    updatePWMs();
-    for(int i=0; i<10000;i++) calculateFeedbacks();
+    //outputEnable = false;
+    //updatePWMs();
+    //for(int i=0; i<10000;i++) calculateFeedbacks();
     //if (averageOutputVoltage <= 0)
 }
 
@@ -107,7 +75,7 @@ void indicateWaitingForBattery() {
 }
 
 void delay2(uint32_t ms) {
-    for(int i=0;i<ms;i++){
+    for(uint32_t i=0;i<ms;i++){
         calculateFeedbacks();
         delay(1);
     }
@@ -162,16 +130,7 @@ int main(void) {
     initUSART();
     initADC();
     initPWMs();
-    initFan();
-    initBypassRelay();
     initACIn();
-    initBatteryLowLED();
-    initBuzzer();
-    initChargeLED();
-    initDSEqualization();
-    initPBStopStart();
-
-
     delay2(1000);
     setBuzzer(true);delay(100);setBuzzer(false); delay(1000);
     
@@ -181,7 +140,9 @@ int main(void) {
 
     while (1)
     {
-
+        buckboost.update(outputVoltage,outputCurrent);
+        TIM1->CCR1 = buckboost.getHsValue();
+        TIM3->CCR1 = buckboost.getLsValue();
         static uint32_t lastmsTicks = msTicks;
         if (lastmsTicks  != msTicks) {
             lastmsTicks = msTicks;
