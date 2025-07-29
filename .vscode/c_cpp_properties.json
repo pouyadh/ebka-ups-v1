@@ -10,7 +10,6 @@
             "includePath": [
                 "C:/Users/Pouya/Desktop/New folder (2)/include",
                 "C:/Users/Pouya/Desktop/New folder (2)/src",
-                "C:/Users/Pouya/Desktop/New folder (2)/lib/PID",
                 "C:/Users/Pouya/.platformio/packages/framework-cmsis@2.50501.200527/CMSIS/Include",
                 "C:/Users/Pouya/.platformio/packages/framework-cmsis-stm32f0/Include",
                 ""
@@ -20,7 +19,6 @@
                 "path": [
                     "C:/Users/Pouya/Desktop/New folder (2)/include",
                     "C:/Users/Pouya/Desktop/New folder (2)/src",
-                    "C:/Users/Pouya/Desktop/New folder (2)/lib/PID",
                     "C:/Users/Pouya/.platformio/packages/framework-cmsis@2.50501.200527/CMSIS/Include",
                     "C:/Users/Pouya/.platformio/packages/framework-cmsis-stm32f0/Include",
                     ""
