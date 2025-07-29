@@ -11,7 +11,7 @@ struct BlinkDelays {
 class Blinker {
     private:
     GPIO *gpio;
-    BlinkDelays *blinkDelays;
+    BlinkDelays *blinkDelays = nullptr;
     uint32_t index;
     uint32_t tick;
     public:
