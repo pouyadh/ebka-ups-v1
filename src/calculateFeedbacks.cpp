@@ -1,8 +1,6 @@
 #include "main.h"
 #include "util/adc2voltage.h"
 #include "util/resistorDividerVin.h"
-#include "util/shantCurrent.h"
-#include "PID.h"
 #include <math.h>
 
 float inputVoltage,outputCurrent,outputVoltage,vdd,outputWattage,outputCurrentAdjust;
